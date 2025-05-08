@@ -1,0 +1,48 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Producción Panadería</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>🍞 Calculadora de Producción</h1>
+        
+        <!-- Tabla de Inputs -->
+        <table>
+            <tr>
+                <th>Tipo de Pan</th>
+                <th>Stock Ideal</th>
+                <th>Bolsas Actuales</th>
+            </tr>
+            <!-- Filas generadas por JavaScript -->
+        </table>
+
+        <!-- Selector de Multiplicador -->
+<div class="multiplicador">
+    <p>Ajustar producción:</p>
+    <div class="botones-multiplicador">
+        <button onclick="cambiarMultiplicador(0.5)">0.5x</button>
+        <button onclick="cambiarMultiplicador(0.75)">0.75x</button>
+        <button onclick="cambiarMultiplicador(1)" class="activo">1x</button>
+        <button onclick="cambiarMultiplicador(1.25)">1.25x</button>
+        <button onclick="cambiarMultiplicador(1.5)">1.5x</button>
+        <button onclick="cambiarMultiplicador(2)">2x</button>
+        <button onclick="cambiarMultiplicador(2.5)">2.5x</button>
+    </div>
+</div>
+        
+        <!-- Botones -->
+        <button onclick="calcular()">Calcular Producción</button>
+        <button onclick="imprimir()">🖨️ Imprimir</button>
+        
+        <!-- Resultado -->
+        <div id="resultado" class="resultado-impresion"></div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

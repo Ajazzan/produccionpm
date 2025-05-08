@@ -1,0 +1,132 @@
+/* Nueva paleta: tonos neutros y prácticos */
+:root {
+    --color-primario: #5c3a21;  /* Café oscuro serio */
+    --color-secundario: #7f5539; /* Café medio */
+    --color-terciario: #b08968;  /* Café claro */
+    --color-fondo: #f5f5f5;      /* Gris claro neutro */
+    --color-texto: #333333;      /* Texto oscuro */
+    --color-borde: #d3d3d3;      /* Gris suave */
+    --color-destacado: #8c6e4e;  /* Café para elementos importantes */
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--color-borde);
+}
+
+h1 {
+    color: var(--color-primario);
+    text-align: center;
+    font-size: 22px;
+    margin-bottom: 20px;
+    font-weight: normal;
+    border-bottom: 2px solid var(--color-terciario);
+    padding-bottom: 10px;
+}
+
+/* Tabla funcional */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: white;
+}
+
+th, td {
+    border: 1px solid var(--color-borde);
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: var(--color-primario);
+    color: white;
+    font-weight: normal;
+}
+
+/* Inputs discretos */
+input {
+    width: 70px;
+    padding: 8px;
+    border: 1px solid var(--color-borde);
+    border-radius: 4px;
+    background-color: white;
+}
+
+/* Botones profesionales */
+button {
+    background-color: var(--color-secundario);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: var(--color-primario);
+}
+
+/* Resultado claro */
+#resultado {
+    background-color: white;
+    border: 1px solid var(--color-borde);
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 4px;
+}
+
+.resaltar {
+    color: var(--color-primario);
+    font-weight: bold;
+}
+
+/* Multiplicadores discretos */
+.multiplicador {
+    margin: 15px 0;
+    text-align: center;
+}
+
+.multiplicador p {
+    color: var(--color-primario);
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.botones-multiplicador button {
+    background-color: var(--color-terciario);
+    padding: 4px 8px;
+    font-size: 12px;
+}
+
+.botones-multiplicador button.activo {
+    background-color: var(--color-primario);
+}
+
+/* Impresión optimizada */
+@media print {
+    #resultado {
+        border: none;
+        padding: 5px;
+        font-size: 12px;
+    }
+    .resaltar {
+        color: black;
+    }
+}

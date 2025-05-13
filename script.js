@@ -19,21 +19,17 @@ function guardarStocks() {
 
 // Redondea a la decena superior
 function redondearDecena(num) {
-    if (num <= 0) return 0; // opcional, para no redondear negativos o cero
+    if (num <= 0) return 0;
 
     const resto10 = num % 10;
     if (resto10 === 0) {
-        // Ya es múltiplo de 10
         return num;
     } else if (resto10 <= 5) {
-        // Redondear hacia arriba al múltiplo de 5 más cercano
         return num - resto10 + 5;
     } else {
-        // Redondear hacia arriba al múltiplo de 10 siguiente
         return num - resto10 + 10;
     }
 }
-
 
 // Cambiar multiplicador y actualizar botones activos
 function cambiarMultiplicador(valor) {
@@ -94,43 +90,51 @@ function imprimir() {
     const ventana = window.open("", "_blank");
     const fecha = new Date().toLocaleString('es-ES');
 
+    const mensajes = [
+        "Producción exacta, resultados concretos.",
+        "¡Cero desperdicio, máxima eficiencia!",
+        "Cada bolsa cuenta, no te desvíes.",
+        "Las desviaciones impactan tu bono.",
+        "Produce lo justo, ni más ni menos."
+    ];
+    const mensajeFinal = mensajes[Math.floor(Math.random() * mensajes.length)];
+
     let contenido = `
         <!DOCTYPE html>
         <html>
         <head>
             <title>Producción ${fecha}</title>
             <style>
-    @page {
-        size: 58mm auto;
-        margin: 0;
-    }
-    body { 
-        font-family: Arial, sans-serif; 
-        width: 58mm; 
-        margin: 0; 
-        padding: 5px; 
-        font-size: 17px;
-    }
-    h1 { 
-        font-size: 18px; 
-        text-align: center; 
-        margin-bottom: 5px; 
-    }
-    .fecha { 
-        font-size: 13px; 
-        text-align: center; 
-        margin-bottom: 15px; 
-        color: #555;
-    }
-    ul { 
-        padding-left: 20px; 
-        margin: 0; 
-    }
-    li { 
-        margin-bottom: 8px; 
-    }
-</style>
-
+                @page {
+                    size: 58mm auto;
+                    margin: 0;
+                }
+                body { 
+                    font-family: Arial, sans-serif; 
+                    width: 58mm; 
+                    margin: 0; 
+                    padding: 5px; 
+                    font-size: 17px;
+                }
+                h1 { 
+                    font-size: 18px; 
+                    text-align: center; 
+                    margin-bottom: 5px; 
+                }
+                .fecha { 
+                    font-size: 12px; 
+                    text-align: center; 
+                    margin-bottom: 15px; 
+                    color: #000;
+                }
+                ul { 
+                    padding-left: 20px; 
+                    margin: 0; 
+                }
+                li { 
+                    margin-bottom: 8px; 
+                }
+            </style>
         </head>
         <body>
             <h1>Producción para hoy</h1>
@@ -148,7 +152,7 @@ function imprimir() {
 
     contenido += `
             </ul>
-            <p style="text-align:center; margin-top: 15px;">⚡ ¡A hornear se dijo! ⚡</p>
+            <p style="text-align:center; margin-top: 15px;">${mensajeFinal}</p>
         </body>
         </html>
     `;
@@ -157,5 +161,3 @@ function imprimir() {
     ventana.document.close();
     ventana.print();
 }
-
-

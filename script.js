@@ -100,32 +100,37 @@ function imprimir() {
         <head>
             <title>Producción ${fecha}</title>
             <style>
-                body { 
-                    font-family: Arial, sans-serif; 
-                    width: 58mm; 
-                    margin: 0; 
-                    padding: 5px; 
-                    font-size: 16px; /* aumentado de 14px a 16px */
-                }
-                h1 { 
-                    font-size: 18px; /* aumentado de 16px a 18px */
-                    text-align: center; 
-                    margin-bottom: 5px; 
-                }
-                .fecha { 
-                    font-size: 12px; /* aumentado de 10px a 12px */
-                    text-align: center; 
-                    margin-bottom: 15px; 
-                    color: #555;
-                }
-                ul { 
-                    padding-left: 20px; 
-                    margin: 0; 
-                }
-                li { 
-                    margin-bottom: 8px; 
-                }
-            </style>
+    @page {
+        size: 58mm auto;
+        margin: 0;
+    }
+    body { 
+        font-family: Arial, sans-serif; 
+        width: 58mm; 
+        margin: 0; 
+        padding: 5px; 
+        font-size: 17px;
+    }
+    h1 { 
+        font-size: 18px; 
+        text-align: center; 
+        margin-bottom: 5px; 
+    }
+    .fecha { 
+        font-size: 13px; 
+        text-align: center; 
+        margin-bottom: 15px; 
+        color: #555;
+    }
+    ul { 
+        padding-left: 20px; 
+        margin: 0; 
+    }
+    li { 
+        margin-bottom: 8px; 
+    }
+</style>
+
         </head>
         <body>
             <h1>Producción para hoy</h1>

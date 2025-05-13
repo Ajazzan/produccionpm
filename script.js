@@ -91,11 +91,14 @@ function imprimir() {
     const fecha = new Date().toLocaleString('es-ES');
 
     const mensajes = [
-        "Producción exacta, resultados concretos.",
-        "¡Cero desperdicio, máxima eficiencia!",
-        "Cada bolsa cuenta, no te desvíes.",
+        // Pasivo-agresivos / correctivos
         "Las desviaciones impactan tu bono.",
-        "Produce lo justo, ni más ni menos."
+        "Cada bolsa cuenta, no te desvíes.",
+    
+        // Motivacionales con emojis
+        "¡Vamos equipo! Calidad desde la primera bolsa 💪🔥",
+        "El horno no espera, ¡a dar lo mejor hoy! ✨",
+        "Panes listos, equipo listo, ¡a brillar! 🌟🥖"
     ];
     const mensajeFinal = mensajes[Math.floor(Math.random() * mensajes.length)];
 

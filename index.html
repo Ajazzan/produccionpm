@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -21,19 +20,34 @@
             <!-- Filas generadas por JavaScript -->
         </table>
 
-        <!-- Selector de Multiplicador -->
-<div class="multiplicador">
-    <p>Ajustar producción:</p>
-    <div class="botones-multiplicador">
-        <button onclick="cambiarMultiplicador(0.5)">0.5x</button>
-        <button onclick="cambiarMultiplicador(0.75)">0.75x</button>
-        <button onclick="cambiarMultiplicador(1)" class="activo">1x</button>
-        <button onclick="cambiarMultiplicador(1.25)">1.25x</button>
-        <button onclick="cambiarMultiplicador(1.5)">1.5x</button>
-        <button onclick="cambiarMultiplicador(2)">2x</button>
-        <button onclick="cambiarMultiplicador(2.5)">2.5x</button>
-    </div>
-</div>
+        <!-- Selector de Multiplicadores -->
+        <div class="multiplicadores-container">
+            <div class="multiplicador">
+                <p>Ajustar producción Panadería:</p>
+                <div class="botones-multiplicador">
+                    <button onclick="cambiarMultiplicadorPanaderia(0.5)">0.5x</button>
+                    <button onclick="cambiarMultiplicadorPanaderia(0.75)">0.75x</button>
+                    <button onclick="cambiarMultiplicadorPanaderia(1)" class="activo-panaderia">1x</button>
+                    <button onclick="cambiarMultiplicadorPanaderia(1.25)">1.25x</button>
+                    <button onclick="cambiarMultiplicadorPanaderia(1.5)">1.5x</button>
+                    <button onclick="cambiarMultiplicadorPanaderia(2)">2x</button>
+                    <button onclick="cambiarMultiplicadorPanaderia(2.5)">2.5x</button>
+                </div>
+            </div>
+
+            <div class="multiplicador">
+                <p>Ajustar producción Comida Rápida:</p>
+                <div class="botones-multiplicador">
+                    <button onclick="cambiarMultiplicadorRapida(0.5)">0.5x</button>
+                    <button onclick="cambiarMultiplicadorRapida(0.75)">0.75x</button>
+                    <button onclick="cambiarMultiplicadorRapida(1)" class="activo-rapida">1x</button>
+                    <button onclick="cambiarMultiplicadorRapida(1.25)">1.25x</button>
+                    <button onclick="cambiarMultiplicadorRapida(1.5)">1.5x</button>
+                    <button onclick="cambiarMultiplicadorRapida(2)">2x</button>
+                    <button onclick="cambiarMultiplicadorRapida(2.5)">2.5x</button>
+                </div>
+            </div>
+        </div>
         
         <!-- Botones -->
         <button onclick="calcular()">Calcular Producción</button>

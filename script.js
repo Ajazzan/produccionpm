@@ -1,16 +1,22 @@
 // Carga stockIdeal desde localStorage o usa valores por defecto
 let stockIdeal = JSON.parse(localStorage.getItem('stockIdeal')) || {
+    // Panes de comida rápida
     "Pan de Hamburguesa": 80,
     "Pan de Perro": 70,
     "Pan de Whopper": 60,
+    
+    // Panes de panadería
     "Pan Frances": 100,
     "Pan de Flor": 80,
     "Pan de Piñita": 60,
     "Pan de Molde": 70,
     "Pan de Leche": 100,
+    "Pan Canilla x4": 15,
+    "Pan Dulce Largo": 5
 };
 
-let multiplicador = 1;
+let multiplicadorPanaderia = 1;
+let multiplicadorRapida = 1;
 
 // Guarda el stockIdeal actualizado en localStorage
 function guardarStocks() {
@@ -31,11 +37,23 @@ function redondearDecena(num) {
     }
 }
 
-// Cambiar multiplicador y actualizar botones activos
-function cambiarMultiplicador(valor) {
-    multiplicador = valor;
+// Cambiar multiplicador panadería
+function cambiarMultiplicadorPanaderia(valor) {
+    multiplicadorPanaderia = valor;
     document.querySelectorAll('.botones-multiplicador button').forEach(boton => {
-        boton.classList.toggle('activo', parseFloat(boton.textContent) === valor);
+        if (boton.parentElement.parentElement.querySelector('p').textContent.includes('Panadería')) {
+            boton.classList.toggle('activo-panaderia', parseFloat(boton.textContent) === valor);
+        }
+    });
+}
+
+// Cambiar multiplicador comida rápida
+function cambiarMultiplicadorRapida(valor) {
+    multiplicadorRapida = valor;
+    document.querySelectorAll('.botones-multiplicador button').forEach(boton => {
+        if (boton.parentElement.parentElement.querySelector('p').textContent.includes('Rápida')) {
+            boton.classList.toggle('activo-rapida', parseFloat(boton.textContent) === valor);
+        }
     });
 }
 
@@ -66,13 +84,24 @@ document.addEventListener('input', (e) => {
     }
 });
 
-// Calcular producción necesaria aplicando multiplicador y redondeo
+// Calcular producción necesaria aplicando multiplicadores y redondeo
 function calcular() {
     let resultadoHTML = "<h2>📋 Producción Necesaria</h2><ul>";
     
+    // Panes de comida rápida
+    const panesRapida = ["Pan de Hamburguesa", "Pan de Perro", "Pan de Whopper"];
+    
     Object.entries(stockIdeal).forEach(([pan, ideal]) => {
         const actual = parseInt(document.getElementById(`actual-${pan.replace(/\s/g, '')}`).value) || 0;
-        const produccion = Math.max(0, ideal - actual) * multiplicador;
+        let produccion = Math.max(0, ideal - actual);
+        
+        // Aplicar multiplicador correspondiente
+        if (panesRapida.includes(pan)) {
+            produccion *= multiplicadorRapida;
+        } else {
+            produccion *= multiplicadorPanaderia;
+        }
+        
         const redondeado = redondearDecena(produccion);
         
         resultadoHTML += `
@@ -91,11 +120,8 @@ function imprimir() {
     const fecha = new Date().toLocaleString('es-ES');
 
     const mensajes = [
-        // Pasivo-agresivos / correctivos
         "Las desviaciones impactan tu bono.",
         "Cada bolsa cuenta, no te desvíes.",
-    
-        // Motivacionales con emojis
         "¡Vamos equipo! Calidad desde la primera bolsa 💪🔥",
         "El horno no espera, ¡a dar lo mejor hoy! ✨",
         "Panes listos, equipo listo, ¡a brillar! 🌟🥖"
@@ -108,10 +134,7 @@ function imprimir() {
         <head>
             <title>Producción ${fecha}</title>
             <style>
-                @page {
-                    size: 58mm auto;
-                    margin: 0;
-                }
+                @page { size: 58mm auto; margin: 0; }
                 body { 
                     font-family: Arial, sans-serif; 
                     width: 58mm; 
@@ -145,11 +168,20 @@ function imprimir() {
             <ul>
     `;
 
+    // Panes de comida rápida
+    const panesRapida = ["Pan de Hamburguesa", "Pan de Perro", "Pan de Whopper"];
+    
     Object.entries(stockIdeal).forEach(([pan, ideal]) => {
         const actual = parseInt(document.getElementById(`actual-${pan.replace(/\s/g, '')}`).value) || 0;
-        const produccion = Math.max(0, ideal - actual) * multiplicador;
+        let produccion = Math.max(0, ideal - actual);
+        
+        if (panesRapida.includes(pan)) {
+            produccion *= multiplicadorRapida;
+        } else {
+            produccion *= multiplicadorPanaderia;
+        }
+        
         const redondeado = redondearDecena(produccion);
-
         contenido += `<li>${pan}: ${redondeado} bolsas</li>`;
     });
 

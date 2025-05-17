@@ -1,16 +1,16 @@
 // Carga stockIdeal desde localStorage o usa valores por defecto
 let stockIdeal = JSON.parse(localStorage.getItem('stockIdeal')) || {
     // Panes de comida rápida
-    "Pan de Hamburguesa": 80,
-    "Pan de Perro": 70,
-    "Pan de Whopper": 60,
+    "Pan de Hamburguesa": 30,
+    "Pan de Perro": 20,
+    "Pan de Whopper": 10,
     
     // Panes de panadería
-    "Pan Frances": 100,
-    "Pan de Flor": 80,
-    "Pan de Piñita": 60,
-    "Pan de Molde": 70,
-    "Pan de Leche": 100,
+    "Pan Frances": 75,
+    "Pan de Flor": 5,
+    "Pan de Piñita": 5,
+    "Pan de Molde": 6,
+    "Pan de Leche": 10,
     "Pan Canilla x4": 15,
     "Pan Dulce Largo": 5
 };

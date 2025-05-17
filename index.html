@@ -3,62 +3,194 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Producción Panadería</title>
+    <title>Producción Panadería | Sistema Intuitivo</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <h1>🍞 Calculadora de Producción</h1>
-        
-        <!-- Tabla de Inputs -->
-        <table>
-            <tr>
-                <th>Tipo de Pan</th>
-                <th>Stock Ideal</th>
-                <th>Bolsas Actuales</th>
-            </tr>
-            <!-- Filas generadas por JavaScript -->
-        </table>
-
-        <!-- Selector de Multiplicadores -->
-        <div class="multiplicadores-container">
-            <div class="multiplicador">
-                <p>Ajustar producción Panadería:</p>
-                <div class="botones-multiplicador">
-                    <button onclick="cambiarMultiplicadorPanaderia(0.5)">0.5x</button>
-                    <button onclick="cambiarMultiplicadorPanaderia(0.75)">0.75x</button>
-                    <button onclick="cambiarMultiplicadorPanaderia(1)" class="activo-panaderia">1x</button>
-                    <button onclick="cambiarMultiplicadorPanaderia(1.25)">1.25x</button>
-                    <button onclick="cambiarMultiplicadorPanaderia(1.5)">1.5x</button>
-                    <button onclick="cambiarMultiplicadorPanaderia(2)">2x</button>
-                    <button onclick="cambiarMultiplicadorPanaderia(2.5)">2.5x</button>
-                </div>
-            </div>
-
-            <div class="multiplicador">
-                <p>Ajustar producción Comida Rápida:</p>
-                <div class="botones-multiplicador">
-                    <button onclick="cambiarMultiplicadorRapida(0.5)">0.5x</button>
-                    <button onclick="cambiarMultiplicadorRapida(0.75)">0.75x</button>
-                    <button onclick="cambiarMultiplicadorRapida(1)" class="activo-rapida">1x</button>
-                    <button onclick="cambiarMultiplicadorRapida(1.25)">1.25x</button>
-                    <button onclick="cambiarMultiplicadorRapida(1.5)">1.5x</button>
-                    <button onclick="cambiarMultiplicadorRapida(2)">2x</button>
-                    <button onclick="cambiarMultiplicadorRapida(2.5)">2.5x</button>
-                </div>
+    <!-- Modal de Ayuda -->
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Guía Rápida <i class="fas fa-info-circle"></i></h2>
+            <div id="modalContent">
+                <!-- El contenido se llena dinámicamente -->
             </div>
         </div>
-        
-        <!-- Botones principales -->
-        <div style="text-align: center; margin-top: 15px;">
-            <button onclick="calcular()">Calcular Producción</button>
-            <button onclick="imprimir()">🖨️ Imprimir</button>
-        </div>
-        
-        <!-- Resultado -->
-        <div id="resultado" class="resultado-impresion"></div>
     </div>
-    
+
+    <div class="container">
+        <h1>
+            🥖 Calculadora de Producción Panadera 
+            <span class="help-icon" onclick="openHelp('main')">
+                ?
+                <span class="tooltip">Haz clic para ver la guía completa</span>
+            </span>
+        </h1>
+        
+        <!-- Columna Izquierda - Inventario -->
+        <div class="inventory-section">
+            <div class="section">
+                <h3 class="section-title">
+                    <i class="fas fa-boxes"></i> Inventario Actual
+                    <span class="help-icon" onclick="openHelp('inventory')">
+                        ?
+                        <span class="tooltip">Cómo registrar tu inventario actual</span>
+                    </span>
+                </h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tipo de Pan</th>
+                            <th>Stock Ideal
+                                <span class="help-icon" onclick="openHelp('idealStock')">
+                                    ?
+                                    <span class="tooltip">Qué es el stock ideal</span>
+                                </span>
+                            </th>
+                            <th>Bolsas Actuales
+                                <span class="help-icon" onclick="openHelp('currentStock')">
+                                    ?
+                                    <span class="tooltip">Cómo contar las bolsas actuales</span>
+                                </span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventoryTable">
+                        <!-- Generado por JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">
+                    <i class="fas fa-sliders-h"></i> Ajustes de Producción
+                    <span class="help-icon" onclick="openHelp('multipliers')">
+                        ?
+                        <span class="tooltip">Cómo usar los multiplicadores</span>
+                    </span>
+                </h3>
+                <div class="multipliers-grid">
+                    <div class="multiplier-group">
+                        <h4>
+                            <i class="fas fa-bread-slice"></i> Panadería
+                            <span class="help-icon" onclick="openHelp('bakeryMultiplier')">
+                                ?
+                                <span class="tooltip">Multiplicador para panes tradicionales</span>
+                            </span>
+                        </h4>
+                        <div class="multiplier-buttons" id="bakeryMultipliers">
+                            <!-- Generado por JavaScript -->
+                        </div>
+                    </div>
+
+                    <div class="multiplier-group">
+                        <h4>
+                            <i class="fas fa-hamburger"></i> Comida Rápida
+                            <span class="help-icon" onclick="openHelp('fastfoodMultiplier')">
+                                ?
+                                <span class="tooltip">Multiplicador para panes de hamburguesas y hot dogs</span>
+                            </span>
+                        </h4>
+                        <div class="multiplier-buttons" id="fastfoodMultipliers">
+                            <!-- Generado por JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Columna Derecha - Producción -->
+        <div class="production-section">
+            <div class="section">
+                <h3 class="section-title">
+                    <i class="fas fa-calculator"></i> Acciones
+                </h3>
+                <button class="btn btn-calculate" onclick="calcular()">
+                    <i class="fas fa-calculator"></i> Calcular Producción
+                    <span class="help-icon" onclick="openHelp('calculate')">
+                        ?
+                        <span class="tooltip">Cómo se calcula la producción necesaria</span>
+                    </span>
+                </button>
+                <button class="btn btn-print" onclick="imprimir()">
+                    <i class="fas fa-print"></i> Imprimir Lista
+                    <span class="help-icon" onclick="openHelp('print')">
+                        ?
+                        <span class="tooltip">Configuración para impresión en ticket</span>
+                    </span>
+                </button>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">
+                    <i class="fas fa-clipboard-list"></i> Resultados
+                    <span class="help-icon" onclick="openHelp('results')">
+                        ?
+                        <span class="tooltip">Cómo interpretar los resultados</span>
+                    </span>
+                </h3>
+                <div class="results-container" id="resultado">
+                    <div class="welcome-message">
+                        <p><i class="fas fa-info-circle"></i> Ingresa tus cantidades actuales y haz clic en "Calcular Producción" para comenzar.</p>
+                        <p>Usa los multiplicadores para ajustar según necesidades especiales (fines de semana, promociones, etc.).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
+    <script>
+        // Sistema de ayuda
+        const helpContents = {
+            main: `<h3>Bienvenido al Sistema de Producción Panadera</h3>
+                  <p>Esta herramienta te ayuda a calcular cuánto producir cada día basado en tu inventario actual.</p>
+                  <p><strong>Flujo de trabajo:</strong></p>
+                  <ol>
+                      <li>Registra tus bolsas actuales</li>
+                      <li>Ajusta los multiplicadores si es necesario</li>
+                      <li>Calcula la producción</li>
+                      <li>Imprime la lista para tu equipo</li>
+                  </ol>`,
+            
+            inventory: `<h3>Registro de Inventario</h3>
+                      <p>Ingresa la cantidad de bolsas que tienes actualmente de cada tipo de pan.</p>
+                      <p><strong>Tip:</strong> Realiza conteos precisos al final del día para mejores resultados.</p>`,
+            
+            multipliers: `<h3>Multiplicadores de Producción</h3>
+                        <p>Estos ajustes te permiten aumentar o disminuir la producción calculada:</p>
+                        <ul>
+                            <li><strong>0.5x:</strong> Días de muy baja demanda</li>
+                            <li><strong>1x:</strong> Producción normal (default)</li>
+                            <li><strong>1.5x:</strong> Fines de semana o eventos</li>
+                            <li><strong>2x:</strong> Festivos o promociones especiales</li>
+                        </ul>`,
+            
+            print: `<h3>Impresión Optimizada</h3>
+                   <p>El sistema genera un ticket listo para impresión en papel de 58mm.</p>
+                   <p><strong>Consejos:</strong></p>
+                   <ul>
+                       <li>Verifica que tu impresora térmica esté configurada correctamente</li>
+                       <li>Usa papel de calidad para mejor legibilidad</li>
+                       <li>El ticket incluye fecha y hora automáticamente</li>
+                   </ul>`
+        };
+
+        function openHelp(topic) {
+            document.getElementById('modalContent').innerHTML = helpContents[topic] || helpContents['main'];
+            document.getElementById('helpModal').style.display = 'block';
+        }
+
+        document.querySelector('.close-modal').onclick = function() {
+            document.getElementById('helpModal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == document.getElementById('helpModal')) {
+                document.getElementById('helpModal').style.display = 'none';
+            }
+        }
+    </script>
 </body>
 </html>
